@@ -95,7 +95,7 @@ def make_df(idList):
     dict1 = {}
 
     for r_id in idList:
-        page = open('/home/ania/cookidump/recipes/recipesr{}.html'.format(r_id), "r", encoding='utf-8')
+        page = open('recipes/recipesr{}.html'.format(r_id), "r", encoding='utf-8')
         page = BeautifulSoup(page, 'html')
         r_name = name(page)
         try:
