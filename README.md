@@ -9,7 +9,7 @@ The initial concept of this program was based on [auino/cookidump](https://githu
 The read_recipes program read all recipes from downloaded html files and convert them into one excel file. 
 Its purpose is to make foundation for further study of food preferencies.
 
-### ToDo ###
+### TODO ###
 
 Use multiprocessing to make cookidump faster.
 
