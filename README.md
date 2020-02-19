@@ -1,7 +1,3 @@
-# cookidump
-
-Easily dump cookidoo recipes from the official website
-
 ### Description ###
 
 The cookidump program allows you to dump all recipes on [Cookidoo](https://cookidoo.pl) websites (available for different countries) for offline and posticipate reading.
@@ -13,7 +9,7 @@ The initial concept of this program was based on [auino/cookidump](https://githu
 The read_recipes program read all recipes from downloaded html files and convert them into one excel file. 
 Its purpose is to make foundation for further study of food preferencies.
 
-### TODO ###
+### ToDo ###
 
 Use multiprocessing to make cookidump faster.
 
