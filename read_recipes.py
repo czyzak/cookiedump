@@ -169,7 +169,6 @@ a_export_excel = a.to_excel('recipee_base.xlsx', index = None, header=True, enco
 
 print('All recipes was downloaded to the recipee_base.xlsx file.')
 
-#base_pickle = a.to_pickle('recepee_base.pkl')
 
 
 

@@ -1,20 +1,13 @@
 #!/usr/bin/python3
 
-# cookidump
-# Original GitHub project:
-# https://github.com/auino/cookidump
+
 
 import os
 import io
-import argparse
-import platform
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 
