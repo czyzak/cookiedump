@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 
 import os
-import io
-import argparse
-import platform
 import time
 import requests
 import multiprocessing
