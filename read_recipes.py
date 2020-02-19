@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-## The program read all html files of recepies and return the excel file with all informations.
+## The program read all html files of recipes and return the excel file with all informations.
 
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -96,7 +96,7 @@ def make_df(idList):
 
     for r_id in idList:
         page = open('recipes/recipesr{}.html'.format(r_id), "r", encoding='utf-8')
-        page = BeautifulSoup(page, 'html')
+        page = BeautifulSoup(page, 'html.parser')
         r_name = name(page)
         try:
             r_nutr = nutrition(page)              
@@ -109,15 +109,8 @@ def make_df(idList):
             r_fat1 = r_nutr.get(nutr_list[6])
             r_protein = r_nutr.get(nutr_list[7])
         except:
-            r_kcal = ''
-            r_carbohydrates =''
-            r_fibre =''
-            r_sodium =''
-            r_fat2 = ''
-            r_cholesterol =''
-            r_fat1 =''
-            r_protein ='' 
-        
+            break
+
         r_ingr = ingredients(page)        
         try:
             r_diffi = difficulty(page)
@@ -139,14 +132,18 @@ def make_df(idList):
         r_description = description(page)
 
 # Putting our data into DataFrame
-# for the base data frame we use dictionary as it is on of the fastestest approach of adding many rows to df
-
         dict1[r_id] = [r_id,r_name,r_diffi,r_time,r_rating,r_rating_nr,r_tags, r_kcal, r_carbohydrates,r_fibre,
         r_sodium,r_fat2,r_cholesterol,r_fat1,r_protein, r_ingr, r_description]
  
     df_base=pd.DataFrame.from_dict(dict1, orient='index', columns=col_names1)
-    
+    df_base.rename(columns = {'Węglowodany':'Carbohydrates', 'Błonnik':'Fiber', 'Sód':'Sodium',
+    'Tłuszcz nasycony': 'Saturated Fat', 'Białko':'Protein','Tłuszcz':'Fat','Kalorie':'Calories'},inplace=True)
     return df_base
+
+
+
+
+print('Welcome to read-and-write recipes. We will read all recipes from html files and converti it to the excel file.\n It can take few minutes...')
 
 ## Reading all ids into a list
 f = open('ids.txt', 'r')
@@ -168,23 +165,12 @@ idsList = [int(re.findall(r"\d+",l)[0]) for l in idsList]
 nutr_list = ['Węglowodany', 'Błonnik', 'Sód', 'Tłuszcz nasycony', 'Cholesterol', 'Białko', 'Tłuszcz', 'Kalorie']
 
 a = make_df(idsList)
-a_export_excel = a.to_excel('/home/ania/cookidump/recipee_base.xlsx', index = None, header=True) 
+a_export_excel = a.to_excel('recipee_base.xlsx', index = None, header=True, encoding='utf-8') 
 
-
-#Testing
-# r_id = idsList[1]
-# page = open('/home/ania/cookidump/recipes/recipesr{}.html'.format(r_id), "r", encoding='utf-8')
-# page = BeautifulSoup(page, 'html')
-
-
-# Saving our data
-#a_export_csv = a.to_csv('/home/ania/cookidump/recipee_base.csv', index = None, header=True)
-#b_export_csv = b.to_csv('/home/ania/cookidump/recipee_nutrition.csv', index = None, header=True)
-#a_export_excel = a.to_excel ('/home/ania/cookidump/recipee_base.xlsx', index = None, header=True) 
-#b_export_excel = b.to_excel('/home/ania/cookidump/recipee_nutrition.xlsx', index = None, header=True)
+print('All recipes was downloaded to the recipee_base.xlsx file.')
 
 #base_pickle = a.to_pickle('recepee_base.pkl')
-#nutr_pickle = b.to_pickle('r_nutrition.pkl')
+
 
 
 
